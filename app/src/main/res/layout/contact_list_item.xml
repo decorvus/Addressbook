@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="8dp"
     android:textSize="20sp"
-    android:textColor="@android:color/black"
+    android:textColor="@android:color/white"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:gravity="center_vertical" >
 </TextView>
