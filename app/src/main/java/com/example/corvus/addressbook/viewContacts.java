@@ -1,6 +1,7 @@
 package com.example.corvus.addressbook;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CursorAdapter;
@@ -31,8 +33,10 @@ public class viewContacts extends ListActivity {
         String[] from = new String[] { "name" };
         int[] to = new int[] {  R.id.contactTextView };
 
-        CursorAdapter contactAdapter = new SimpleCursorAdapter(
-                viewContacts.this, R.layout.content_view_contacts, null, from, to);
+        contactAdapter = new SimpleCursorAdapter(
+                viewContacts.this, R.layout.contact_list_item, null, from, to);
+//        CursorAdapter contactAdapter = new SimpleCursorAdapter(
+//                viewContacts.this, R.layout.content_view_contacts, null, from, to);
         setListAdapter(contactAdapter);
 
 
@@ -55,11 +59,17 @@ public class viewContacts extends ListActivity {
     }
     @Override
     protected void onStop(){
-        Cursor cursor  = contactAdapter.getCursor();
-        if (cursor != null)
-            cursor.deactivate();
+        try {
+            Cursor cursor  = contactAdapter.getCursor();
+            if (cursor != null) {
+                cursor.deactivate();
+            }
+        } catch (Exception e) {}
 
-        contactAdapter.changeCursor(null);
+        try {
+            contactAdapter.changeCursor(null);
+        } catch (Exception e) {}
+
         super.onStop();
     }
 
@@ -75,7 +85,9 @@ public class viewContacts extends ListActivity {
 
         @Override
         protected void onPostExecute(Cursor result){
-            contactAdapter.changeCursor(result);
+            try {
+                contactAdapter.changeCursor(result);
+            } catch (Exception e) {}
             databaseConnector.close();
         }
     }

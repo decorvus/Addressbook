@@ -37,8 +37,9 @@ public class DatabaseConnector{
 
     public void addContacts(String name,  String number, String email, String street, String city){
         ContentValues newContact = new ContentValues();
+        System.out.println("QRRRR" + name);
         newContact.put("name", name);
-        newContact.put("number", number);
+        newContact.put("phone", number);
         newContact.put("email", email);
         newContact.put("street", street);
         newContact.put("city", city);
@@ -50,7 +51,7 @@ public class DatabaseConnector{
     public void updateContact(long id, String name, String email, String number, String street, String city){
         ContentValues editContact = new ContentValues();
         editContact.put("name", name);
-        editContact.put("number", number);
+        editContact.put("phone", number);
         editContact.put("email", email);
         editContact.put("street", street);
         editContact.put("city", city);
@@ -64,14 +65,14 @@ public class DatabaseConnector{
     }
 
     public Cursor getOneContact(long id){
-        return database.query("contacts", null, "_id='" + id, null, null, null, null);
+        System.out.println("-----" + String.valueOf(id));
+        return database.query("contacts", null, "_id=" + id, null, null, null, null);
     }
 
     public void deleteContact(long id){
         open();
         database.delete("contacts", "_id=" + id, null);
         close();
-
     }
 
     private class DatabaseOpenHelper extends SQLiteOpenHelper {

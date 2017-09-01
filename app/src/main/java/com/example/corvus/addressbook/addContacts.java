@@ -81,8 +81,12 @@ public class addContacts extends AppCompatActivity {
         DatabaseConnector databaseConnector = new DatabaseConnector(this);
 
         if (getIntent().getExtras() == null){
+            System.out.println("OREWA" + nameEditText.getText());
+            System.out.println("OREWA" + nameEditText.getText().toString());
+            System.out.println("OREWA" + String.valueOf(nameEditText.getText()));
             databaseConnector.addContacts(
                     //marker  insertContact originally
+
                     nameEditText.getText().toString(),
                     phoneEditText.getText().toString(),
                     emailEditText.getText().toString(),
